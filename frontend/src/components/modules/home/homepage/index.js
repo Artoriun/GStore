@@ -9,23 +9,23 @@ import Loader from "../../../layout/loader/Loader";
 import MetaData from "../../../layout/MetaData";
 import AppWrap from "../../../hoc/AppWrap";
 import ProductCard from "../../../common/product-card";
+import { toast } from "react-toastify";
 
 function Home() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { loading, error, products } = useSelector((state) => state.products);
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     dispatch(getProducts());
     return () => { };
-  }, [dispatch, error, alert]);
+  }, [dispatch, error]);
 
   return (
     <div className="app__top-margin">

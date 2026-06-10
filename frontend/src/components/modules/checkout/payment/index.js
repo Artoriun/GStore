@@ -20,11 +20,11 @@ import CheckoutSteps from "../checkout-steps";
 import MetaData from "../../../layout/MetaData";
 import Loader from "../../../layout/loader/Loader";
 import AppWrap from "../../../hoc/AppWrap";
+import { toast } from "react-toastify";
 
 function Payment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const stripe = useStripe();
   const elements = useElements();
   const payBtn = useRef(null);
@@ -96,7 +96,7 @@ function Payment() {
         payBtn.current.disabled = false;
         setLoading(false);
 
-        alert.error(result.error.message);
+        toast.error(result.error.message, { autoClose: 5000 });
       } else {
         if (result.paymentIntent.status === "succeeded") {
           order.paymentInfo = {
@@ -117,18 +117,19 @@ function Payment() {
     } catch (error) {
       payBtn.current.disabled = false;
       setLoading(false);
-      alert.error(error.response.data.message);
+      toast.error(error.response.data.message, { autoClose: 5000 });
     }
   };
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     return () => {};
-  }, [dispatch, error, alert]);
+  }, [dispatch, error, toast]);
+
 
   return (
     <div className="app__top-margin">

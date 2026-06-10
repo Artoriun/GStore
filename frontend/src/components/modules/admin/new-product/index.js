@@ -18,10 +18,10 @@ import SideBar from "../sidebar";
 import MetaData from "../../../layout/MetaData";
 import AppWrap from "../../../hoc/AppWrap";
 import Loader from "../../../layout/loader/Loader";
+import { toast } from "react-toastify";
 
 function NewProduct() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);
@@ -83,18 +83,18 @@ function NewProduct() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (success) {
-      alert.success("Product Created Successfully");
+      toast.success("Product Created Successfully", { autoClose: 5000 });
       navigate("/admin/dashboard");
       dispatch({ type: NEW_PRODUCT_RESET });
     }
 
     return () => {};
-  }, [dispatch, alert, error, navigate, success]);
+  }, [dispatch, error, navigate, success]);
 
   return (
     <div className="app__top-margin">

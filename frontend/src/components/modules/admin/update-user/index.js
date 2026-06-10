@@ -20,10 +20,10 @@ import SideBar from "../sidebar";
 import MetaData from "../../../layout/MetaData";
 import Loader from "../../../layout/loader/Loader";
 import AppWrap from "../../../hoc/AppWrap";
+import { toast } from "react-toastify";
 
 function UpdateUser() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -67,23 +67,22 @@ function UpdateUser() {
       setRole(user.role);
     }
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      alert.error(updateError);
+      toast.error(updateError, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("User Updated Successfully.");
+      toast.success("User Updated Successfully.", { autoClose: 5000 });
       navigate("/admin/users");
       dispatch({ type: UPDATE_USER_RESET });
     }
   }, [
     dispatch,
-    alert,
     error,
     navigate,
     isUpdated,

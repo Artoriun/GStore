@@ -11,10 +11,10 @@ import { UPDATE_PASSWORD_RESET } from "../../../../redux/constants/userConstants
 import Loader from "../../../layout/loader/Loader";
 import MetaData from "../../../layout/MetaData";
 import AppWrap from "../../../hoc/AppWrap";
+import { toast } from "react-toastify";
 
 function UpdatePassword() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { error, loading, isUpdated } = useSelector((state) => state.profile);
@@ -37,12 +37,12 @@ function UpdatePassword() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Password Changed Successfully");
+      toast.success("Password Changed Successfully", { autoClose: 5000 });
 
       navigate("/user/profile");
 
@@ -50,7 +50,7 @@ function UpdatePassword() {
     }
 
     return () => {};
-  }, [dispatch, error, alert, navigate, isUpdated]);
+  }, [dispatch, error, navigate, isUpdated]);
 
   return (
     <div className="app__top-margin">

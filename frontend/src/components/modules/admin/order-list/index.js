@@ -16,10 +16,10 @@ import SideBar from "../sidebar";
 import MetaData from "../../../layout/MetaData";
 import AppWrap from "../../../hoc/AppWrap";
 import currency from "../../../helpers/currency";
+import { toast } from "react-toastify";
 
 function OrderList() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);
@@ -128,17 +128,17 @@ function OrderList() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      toast.error(deleteError, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Order Deleted Successfully");
+      toast.success("Order Deleted Successfully", { autoClose: 5000 });
       navigate("/admin/orders");
       dispatch({ type: DELETE_ORDER_RESET });
     }
@@ -146,7 +146,7 @@ function OrderList() {
     dispatch(getAllOrders(token));
 
     return () => {};
-  }, [dispatch, alert, error, token, deleteError, navigate, isDeleted]);
+  }, [dispatch, error, token, deleteError, navigate, isDeleted]);
 
   return (
     <div className="app__top-margin">

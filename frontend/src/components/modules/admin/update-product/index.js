@@ -19,10 +19,10 @@ import SideBar from "../sidebar";
 import MetaData from "../../../layout/MetaData";
 import AppWrap from "../../../hoc/AppWrap";
 import Loader from "../../../layout/loader/Loader";
+import { toast } from "react-toastify";
 
 function UpdateProduct() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -104,23 +104,23 @@ function UpdateProduct() {
       setOldImages(product.images);
     }
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (updateError) {
-      alert.error(updateError);
+      toast.error(updateError, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Product Updated Successfully");
+      toast.success("Product Updated Successfully", { autoClose: 5000 });
       navigate("/admin/products");
       dispatch({ type: UPDATE_PRODUCT_RESET });
     }
 
     return () => {};
-  }, [dispatch, alert, error, navigate, isUpdated, id, product, updateError]);
+  }, [dispatch, error, navigate, isUpdated, id, product, updateError]);
 
   return (
     <div className="app__top-margin">

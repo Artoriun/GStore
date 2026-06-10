@@ -14,10 +14,10 @@ import {
 import MetaData from "../../../layout/MetaData";
 import SideBar from "../sidebar";
 import AppWrap from "../../../hoc/AppWrap";
+import { toast } from "react-toastify";
 
 function ProductReviewList() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);
@@ -115,17 +115,17 @@ function ProductReviewList() {
       dispatch(getAllReviews(productId, token));
     }
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      toast.error(deleteError);
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Review Deleted Successfully");
+      toast.success("Review Deleted Successfully");
       navigate("/admin/reviews");
       dispatch({ type: DELETE_REVIEW_RESET });
     }
@@ -133,7 +133,6 @@ function ProductReviewList() {
     return () => {};
   }, [
     dispatch,
-    alert,
     error,
     deleteError,
     navigate,

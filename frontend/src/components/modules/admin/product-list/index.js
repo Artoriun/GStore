@@ -17,10 +17,10 @@ import SideBar from "../sidebar";
 import MetaData from "../../../layout/MetaData";
 import AppWrap from "../../../hoc/AppWrap";
 import currency from "../../../helpers/currency";
+import { toast } from "react-toastify";
 
 function ProductList() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);
@@ -35,17 +35,17 @@ function ProductList() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      toast.error(deleteError, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success("Product Deleted Successfully");
+      toast.success("Product Deleted Successfully", { autoClose: 5000 });
       navigate("/admin/dashboard");
       dispatch({ type: DELETE_PRODUCT_RESET });
     }
@@ -53,7 +53,7 @@ function ProductList() {
     dispatch(getAdminProduct(token));
 
     return () => {};
-  }, [dispatch, alert, error, token, deleteError, navigate, isDeleted]);
+  }, [dispatch, error, token, deleteError, navigate, isDeleted]);
 
   const columns = [
     {

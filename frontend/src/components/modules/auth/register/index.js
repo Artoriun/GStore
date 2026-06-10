@@ -7,10 +7,10 @@ import Logo from "../../../../assets/images/logo.png";
 import { clearErrors, register } from "../../../../redux/actions/userAction";
 import Loader from "../../../layout/loader/Loader";
 import MetaData from "../../../layout/MetaData";
+import { toast } from "react-toastify";
 
 function Register() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -49,7 +49,7 @@ function Register() {
     }
 
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
@@ -58,7 +58,7 @@ function Register() {
     }
 
     return () => {};
-  }, [dispatch, error, alert, navigate, isAuthenticated, location]);
+  }, [dispatch, error, navigate, isAuthenticated, location]);
 
   return (
     <>

@@ -6,10 +6,10 @@ import Logo from "../../../../assets/images/logo.png";
 import { clearErrors, login } from "../../../../redux/actions/userAction";
 import Loader from "../../../layout/loader/Loader";
 import MetaData from "../../../layout/MetaData";
+import { toast } from "react-toastify";
 
 function Login() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -33,7 +33,7 @@ function Login() {
     }
 
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
@@ -42,7 +42,7 @@ function Login() {
     }
 
     return () => {};
-  }, [dispatch, error, alert, navigate, isAuthenticated, location]);
+  }, [dispatch, error, navigate, isAuthenticated, location]);
 
   return (
     <>

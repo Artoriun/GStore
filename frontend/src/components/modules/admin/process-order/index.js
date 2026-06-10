@@ -14,11 +14,10 @@ import SideBar from "../sidebar";
 import MetaData from "../../../layout/MetaData";
 import Loader from "../../../layout/loader/Loader";
 import AppWrap from "../../../hoc/AppWrap";
+import { toast } from "react-toastify";
 
 function ProcessOrder() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
-
   const { id } = useParams();
 
   const { token } = useSelector((state) => state.user);
@@ -39,22 +38,22 @@ function ProcessOrder() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
     if (updateError) {
-      alert.error(updateError);
+      toast.error(updateError, { autoClose: 5000 });
       dispatch(clearErrors());
     }
     if (isUpdated) {
-      alert.success("Order Status Updated Successfully.");
+      toast.success("Order Status Updated Successfully.", { autoClose: 5000 });
       dispatch({ type: UPDATE_ORDER_RESET });
     }
 
     dispatch(getOrderDetails(id, token));
 
     return () => {};
-  }, [dispatch, alert, error, id, isUpdated, updateError, token]);
+  }, [dispatch, error, id, isUpdated, updateError, token]);
 
   return (
     <div className="app__top-margin">

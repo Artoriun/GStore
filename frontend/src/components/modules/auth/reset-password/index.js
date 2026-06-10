@@ -11,10 +11,10 @@ import Loader from "../../../layout/loader/Loader";
 import MetaData from "../../../layout/MetaData";
 import Logo from "../../../../assets/images/logo.png";
 import { RESET_PASSWORD_RESET } from "../../../../redux/constants/userConstants";
+import { toast } from "react-toastify";
 
 function ResetPassword() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useParams();
@@ -39,12 +39,12 @@ function ResetPassword() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (success) {
-      alert.success("Password Updated Successfully");
+      toast.success("Password Updated Successfully", { autoClose: 5000 });
 
       navigate("/auth/login");
 
@@ -54,7 +54,7 @@ function ResetPassword() {
     }
 
     return () => {};
-  }, [dispatch, error, alert, navigate, success]);
+  }, [dispatch, error, navigate, success]);
 
   return (
     <>

@@ -11,10 +11,10 @@ import { FORGOT_PASSWORD_RESET } from "../../../../redux/constants/userConstants
 import Loader from "../../../layout/loader/Loader";
 import MetaData from "../../../layout/MetaData";
 import Logo from "../../../../assets/images/logo.png";
+import { toast } from "react-toastify";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { error, loading, message } = useSelector(
@@ -34,12 +34,12 @@ function ForgotPassword() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (message) {
-      alert.success(message);
+      toast.success(message, { autoClose: 5000 });
       navigate("/auth/login");
 
       dispatch({
@@ -48,7 +48,7 @@ function ForgotPassword() {
     }
 
     return () => {};
-  }, [dispatch, error, alert, message, navigate]);
+  }, [dispatch, error, message, navigate]);
 
   return (
     <>

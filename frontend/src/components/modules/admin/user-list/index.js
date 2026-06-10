@@ -16,6 +16,7 @@ import SideBar from "../sidebar";
 import MetaData from "../../../layout/MetaData";
 import AppWrap from "../../../hoc/AppWrap";
 import ProfileImg from "../../../../assets/images/profile.jpg";
+import { toast } from "react-toastify";
 
 function renderUserImage(params) {
   return (
@@ -29,7 +30,6 @@ function renderUserImage(params) {
 
 function UserList() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);
@@ -132,17 +132,17 @@ function UserList() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (deleteError) {
-      alert.error(deleteError);
+      toast.error(deleteError, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     if (isDeleted) {
-      alert.success(message);
+      toast.success(message, { autoClose: 5000 });
       navigate("/admin/users");
       dispatch({ type: DELETE_USER_RESET });
     }
@@ -152,7 +152,6 @@ function UserList() {
     return () => {};
   }, [
     dispatch,
-    alert,
     error,
     deleteError,
     navigate,
