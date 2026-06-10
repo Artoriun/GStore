@@ -1,6 +1,5 @@
 import "../Checkout.css";
 import { useEffect, useRef, useState } from "react";
-import { useAlert } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { FaCalendarAlt, FaCreditCard, FaKey } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";

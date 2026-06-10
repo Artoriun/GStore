@@ -1,10 +1,10 @@
 import "../Product.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-toastify";
 import { useParams } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import AppWrap from "../../../hoc/AppWrap";
+import { toast } from "react-toastify";
 import {
   getProducts,
   clearErrors,
@@ -35,8 +35,6 @@ const Products = () => {
     filteredProductsCount,
   } = useSelector((state) => state.products);
 
-  const toast = (msg, type = "success") => toast[type](msg);
-
   const [currentPage, setCurrentPage] = useState(1);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(500000);
@@ -55,7 +53,7 @@ const Products = () => {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
@@ -66,7 +64,6 @@ const Products = () => {
   }, [
     dispatch,
     error,
-    alert,
     keyword,
     currentPage,
     minPrice,

@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useAlert } from "react-toastify";
 import { BiArrowBack } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
 import {

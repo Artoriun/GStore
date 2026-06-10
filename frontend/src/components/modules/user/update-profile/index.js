@@ -1,9 +1,9 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { useAlert } from "react-toastify";
 import { BiArrowBack } from "react-icons/bi";
 import { MdCake, MdFace, MdMale, MdPhotoCamera } from "react-icons/md";
+import { toast } from "react-toastify";
 import {
   clearErrors,
   updateProfile,
@@ -17,7 +17,6 @@ import profilePng from "../../../../assets/images/profile.jpg";
 
 function UpdateProfile() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
   const imageRef = useRef();
 
@@ -63,13 +62,13 @@ function UpdateProfile() {
       setAvatarPreview(user.avatar?.url || profilePng);
     }
 
-    if (error) {
-      alert.error(error);
+        if (error) {
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (isUpdated) {
-      alert.success("Profile Updated Successfully.");
+      toast.success("Profile Updated Successfully.");
       dispatch(loadUser(token));
 
       navigate("/user/profile");
@@ -79,8 +78,8 @@ function UpdateProfile() {
       });
     }
 
-    return () => {};
-  }, [alert, dispatch, error, isUpdated, navigate, user, token]);
+        return () => {};
+  }, [dispatch, error, isUpdated, navigate, user, token]);
 
   return (
     <div className="app__top-margin">

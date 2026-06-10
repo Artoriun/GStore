@@ -1,7 +1,6 @@
 import "../Dashboard.css";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useAlert } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { FaShippingFast } from "react-icons/fa";
 import currency from "../../../helpers/currency";

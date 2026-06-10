@@ -2,8 +2,8 @@ import "../Product.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import Carousel from "react-material-ui-carousel";
-import { useAlert } from "react-toastify";
 import Rating from "@mui/material/Rating";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { FaStar, FaCartPlus } from "react-icons/fa";
@@ -30,8 +30,7 @@ function ProductDetails() {
     (state) => state.newReview
   );
 
-  const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
+    const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { id } = useParams();
@@ -55,14 +54,14 @@ function ProductDetails() {
     setQuantity(qty);
   };
 
-  const addToCartHandler = () => {
+    const addToCartHandler = () => {
     dispatch(addItemsToCart(id, quantity, token));
-    alert.success("Item Added To Cart");
+    toast.success("Item Added To Cart");
   };
 
   const buyProductHandler = () => {
     dispatch(addItemsToCart(id, quantity, token));
-    alert.success("Item Added To Cart");
+    toast.success("Item Added To Cart");
     navigate("/cart");
   };
 
@@ -82,19 +81,19 @@ function ProductDetails() {
     setOpen(false);
   };
 
-  useEffect(() => {
+    useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error);
       dispatch(clearErrors());
     }
 
     if (reviewError) {
-      alert.error(reviewError);
+      toast.error(reviewError);
       dispatch(clearErrors());
     }
 
     if (success) {
-      alert.success("Review Added Successfully.");
+      toast.success("Review Added Successfully.");
       dispatch({ type: NEW_REVIEW_RESET });
     }
 
@@ -103,7 +102,7 @@ function ProductDetails() {
     }
 
     return () => { };
-  }, [dispatch, id, error, alert, reviewError, success]);
+  }, [dispatch, id, error, reviewError, success]);
 
   return (
     <div className="app__top-margin">
