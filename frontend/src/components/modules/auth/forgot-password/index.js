@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { BiArrowBack } from "react-icons/bi";
 import { HiMail } from "react-icons/hi";
 import {
@@ -15,7 +15,7 @@ import Logo from "../../../../assets/images/logo.png";
 
 function ForgotPassword() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { error, loading, message } = useSelector(

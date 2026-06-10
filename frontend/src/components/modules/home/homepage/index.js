@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import {
   getProducts,
@@ -13,7 +13,7 @@ import ProductCard from "../../../common/product-card";
 
 function Home() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { loading, error, products } = useSelector((state) => state.products);

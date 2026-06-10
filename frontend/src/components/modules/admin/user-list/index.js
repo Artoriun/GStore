@@ -2,7 +2,7 @@ import "../Dashboard.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { Button } from "@mui/material";
@@ -30,7 +30,7 @@ function renderUserImage(params) {
 
 function UserList() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);

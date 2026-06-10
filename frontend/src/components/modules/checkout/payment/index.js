@@ -1,6 +1,6 @@
 import "../Checkout.css";
 import { useEffect, useRef, useState } from "react";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { FaCalendarAlt, FaCreditCard, FaKey } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -25,7 +25,7 @@ import AppWrap from "../../../hoc/AppWrap";
 function Payment() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const stripe = useStripe();
   const elements = useElements();
   const payBtn = useRef(null);

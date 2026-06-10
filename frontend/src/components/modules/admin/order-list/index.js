@@ -2,7 +2,7 @@ import "../Dashboard.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { Button } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import EditIcon from "@mui/icons-material/Edit";
@@ -20,7 +20,7 @@ import currency from "../../../helpers/currency";
 
 function OrderList() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);

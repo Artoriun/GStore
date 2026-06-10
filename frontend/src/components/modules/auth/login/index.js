@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { HiMail, HiLockClosed } from "react-icons/hi";
 import Logo from "../../../../assets/images/logo.png";
 import { clearErrors, login } from "../../../../redux/actions/userAction";
@@ -10,7 +10,7 @@ import MetaData from "../../../layout/MetaData";
 
 function Login() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
   const location = useLocation();
 

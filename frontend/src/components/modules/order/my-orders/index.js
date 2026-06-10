@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import LaunchIcon from "@mui/icons-material/Launch";
 import { DataGrid } from "@mui/x-data-grid";
 import { clearErrors, myOrders } from "../../../../redux/actions/orderAction";
@@ -12,7 +12,7 @@ import currency from "../../../helpers/currency";
 
 function MyOrders() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
 
   const { loading, error, orders } = useSelector((state) => state.myOrders);
   const { token } = useSelector((state) => state.user);

@@ -2,7 +2,7 @@ import "../Dashboard.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import {
   MdAttachMoney,
   MdCategory,
@@ -22,7 +22,7 @@ import Loader from "../../../layout/loader/Loader";
 
 function NewProduct() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);

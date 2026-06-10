@@ -1,7 +1,7 @@
 import "../Dashboard.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { useNavigate, useParams } from "react-router-dom";
 import { HiMail } from "react-icons/hi";
 import {
@@ -24,7 +24,7 @@ import AppWrap from "../../../hoc/AppWrap";
 
 function UpdateUser() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { id } = useParams();

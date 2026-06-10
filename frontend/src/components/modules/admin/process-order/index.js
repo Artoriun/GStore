@@ -1,7 +1,7 @@
 import "../Dashboard.css";
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { useSelector, useDispatch } from "react-redux";
 import { FaShippingFast } from "react-icons/fa";
 import currency from "../../../helpers/currency";
@@ -18,7 +18,7 @@ import AppWrap from "../../../hoc/AppWrap";
 
 function ProcessOrder() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
 
   const { id } = useParams();
 

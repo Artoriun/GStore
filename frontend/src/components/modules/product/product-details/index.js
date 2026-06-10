@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams, useNavigate } from "react-router-dom";
 import Carousel from "react-material-ui-carousel";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import Rating from "@mui/material/Rating";
 import { Dialog, DialogContent, DialogTitle } from "@mui/material";
 import { FaStar, FaCartPlus } from "react-icons/fa";
@@ -31,7 +31,7 @@ function ProductDetails() {
   );
 
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { id } = useParams();

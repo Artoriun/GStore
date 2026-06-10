@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { HiLockClosed, HiLockOpen } from "react-icons/hi";
 import { BiArrowBack } from "react-icons/bi";
 import {
@@ -15,7 +15,7 @@ import { RESET_PASSWORD_RESET } from "../../../../redux/constants/userConstants"
 
 function ResetPassword() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useParams();

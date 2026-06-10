@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate, Link } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { BiArrowBack } from "react-icons/bi";
 import { MdCake, MdFace, MdMale, MdPhotoCamera } from "react-icons/md";
 import {
@@ -17,7 +17,7 @@ import profilePng from "../../../../assets/images/profile.jpg";
 
 function UpdateProfile() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
   const imageRef = useRef();
 

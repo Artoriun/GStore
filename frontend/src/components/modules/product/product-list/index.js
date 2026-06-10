@@ -1,7 +1,7 @@
 import "../Product.css";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { useParams } from "react-router-dom";
 import Pagination from "@mui/material/Pagination";
 import AppWrap from "../../../hoc/AppWrap";
@@ -35,7 +35,7 @@ const Products = () => {
     filteredProductsCount,
   } = useSelector((state) => state.products);
 
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
 
   const [currentPage, setCurrentPage] = useState(1);
   const [minPrice, setMinPrice] = useState(0);

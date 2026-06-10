@@ -2,7 +2,7 @@ import "../Order.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import {
   getOrderDetails,
   clearErrors,
@@ -17,7 +17,7 @@ function OrderDetails() {
   const { order, error, loading } = useSelector((state) => state.orderDetails);
 
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
 
   const { id } = useParams();
 

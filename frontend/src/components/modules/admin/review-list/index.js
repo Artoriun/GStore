@@ -1,7 +1,7 @@
 import "../Dashboard.css";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useAlert } from "react-alert";
+import { useAlert } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { DataGrid } from "@mui/x-data-grid";
 import DeleteIcon from "@mui/icons-material/Delete";
@@ -18,7 +18,7 @@ import AppWrap from "../../../hoc/AppWrap";
 
 function ProductReviewList() {
   const dispatch = useDispatch();
-  const alert = useAlert();
+  const toast = (msg, type = "success") => toast[type](msg);
   const navigate = useNavigate();
 
   const { token } = useSelector((state) => state.user);
