@@ -128,7 +128,7 @@ function Payment() {
     }
 
     return () => {};
-  }, [dispatch, error, toast]);
+  }, [dispatch, error]);
 
 
   return (
