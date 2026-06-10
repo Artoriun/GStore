@@ -8,11 +8,10 @@ import AppWrap from "../../../hoc/AppWrap";
 import MetaData from "../../../layout/MetaData";
 import Loader from "../../../layout/loader/Loader";
 import currency from "../../../helpers/currency";
+import { toast } from "react-toastify";
 
 function MyOrders() {
   const dispatch = useDispatch();
-  const toast = (msg, type = "success") => toast[type](msg);
-
   const { loading, error, orders } = useSelector((state) => state.myOrders);
   const { token } = useSelector((state) => state.user);
 
@@ -94,14 +93,14 @@ function MyOrders() {
 
   useEffect(() => {
     if (error) {
-      alert.error(error);
+      toast.error(error, { autoClose: 5000 });
       dispatch(clearErrors());
     }
 
     dispatch(myOrders(token));
 
     return () => {};
-  }, [dispatch, alert, error, token]);
+  }, [dispatch, error, token]);
 
   return (
     <div className="app__top-margin">

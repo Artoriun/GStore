@@ -1,7 +1,7 @@
 import "../Order.css";
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import {
   getOrderDetails,
   clearErrors,
@@ -9,12 +9,11 @@ import {
 import Loader from "../../../layout/loader/Loader";
 import MetaData from "../../../layout/MetaData";
 import AppWrap from "../../../hoc/AppWrap";
-import currency from "../../../helpers/currency";
 import { toast } from "react-toastify";   // ← <-- NEW import
 
 function OrderDetails() {
   const { token } = useSelector((state) => state.user);
-  const { order, error, loading } = useSelector((state) => state.orderDetails);
+  const { error, loading } = useSelector((state) => state.orderDetails);
 
   const dispatch = useDispatch();
   const { id } = useParams();
@@ -32,7 +31,7 @@ function OrderDetails() {
     dispatch(getOrderDetails(id, token));
 
     return () => {};
-  }, [dispatch, error, id, token, dispatch]);   // ← removed `alert` from deps
+  }, [dispatch, error, id, token]);
 
   /* ---------------------------------------------------------- */
   /* Rest of render remains unchanged */
